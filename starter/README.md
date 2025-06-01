@@ -10,16 +10,25 @@ This is the project for the Memory Management course in the Udacity C++ Nanodegr
 
 # High-level Objectives
 > [!IMPORTANT]  
-> **Your goal is to use the course knowledge to optimize the ChatBot program from a memory management perspective, as specified in the Project Rubric.**
+> _See the Project Rubric for a full list of requirements._
 
-In this project you will analyze and modify the program. Although the program can be executed and works as intended, no advanced concepts as discussed in this course have been used; there are currently no smart pointers, no move semantics and not much thought has been given to ownership or memory allocation.
+In this project, you'll apply your skills to: 
+1. **Analyze problems**, and
+2. **Then modify the program** using the advanced concepts taught in this course
 
-See the Project Rubric for a full list of requirements.
+**To complete the project:** 
+1. **Find each `TODO`** located in the project's files. `TODO`s are located either:
+    - To the side, if the fix is for a single line of code
+    - Above the code, if the fix is for multiple lines of code. These also have a `END OF TODO` comment at the end of the relevant blocks of code.
+3. **Analyze the relevant code to determine what needs to be fixed**
+    - Generally, the `TODO`s don't provide instructions or guidance. This is so you can practice identifying and implementing appropriate fixes.
+4. **Implement the appropriate fix**
+    - Your fixes need to use the advanced concepts taught in this course
 
 # Project Setup
 ## 1. Install Dependencies
 > [!NOTE]  
-> If you're using Udacity Workspace, these are already installed
+> If you're using Udacity Workspace, these dependencies are already installed
 
 * cmake >= 3.11
   * All OSes: [click here for installation instructions](https://cmake.org/install/)
