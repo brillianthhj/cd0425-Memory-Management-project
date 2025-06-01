@@ -34,10 +34,6 @@ In this project, you'll apply your skills to:
   * Linux: gcc / g++ is installed by default on most Linux distros
   * Mac: same deal as make - [install Xcode command line tools](https://developer.apple.com/xcode/features/)
   * Windows: recommend using [MinGW](http://www.mingw.org/)
-* wxWidgets >= 3.0
-  * Linux: `sudo apt-get install libwxgtk3.0-gtk3-dev`
-  * Mac: There is a [homebrew installation available](https://formulae.brew.sh/formula/wxmac).
-  * Installation instructions can be found [here](https://wiki.wxwidgets.org/Install). Some version numbers may need to be changed in instructions to install v3.0 or greater.
 
 ## 2. Compile, build, and Run
 > [!WARNING]  
