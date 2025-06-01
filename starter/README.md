@@ -46,6 +46,9 @@ In this project, you'll apply your skills to:
   * Installation instructions can be found [here](https://wiki.wxwidgets.org/Install). Some version numbers may need to be changed in instructions to install v3.0 or greater.
 
 ## 2. Build, Compile, and Run
-In the top level directory of this project, run the following to build, compile and run:
+> [!WARNING]  
+> **This program won't successfully compile until you've finished the `TODO`s**
+
+In the top level directory of this project, run the following:
 
 `mkdir build && cd build && cmake .. && make && ./membot`
