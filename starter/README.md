@@ -45,9 +45,9 @@ In this project, you'll apply your skills to:
   * Mac: There is a [homebrew installation available](https://formulae.brew.sh/formula/wxmac).
   * Installation instructions can be found [here](https://wiki.wxwidgets.org/Install). Some version numbers may need to be changed in instructions to install v3.0 or greater.
 
-## 2. Build, Compile, and Run
+## 2. Compile, build, and Run
 > [!WARNING]  
-> **This program won't successfully compile until you've finished the `TODO`s**
+> **Until you finished the `TODO`s, the code will compile** (`cmake ..`) **but not build** (`make`)
 
 In the top level directory of this project, run the following:
 
