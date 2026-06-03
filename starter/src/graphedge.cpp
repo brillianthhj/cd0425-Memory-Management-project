@@ -4,9 +4,11 @@
 
 GraphEdge::GraphEdge(int id) { _id = id; }
 
-void GraphEdge::SetChildNode(GraphNode *childNode) { _childNode = childNode; }
+void GraphEdge::SetChildNode(GraphNodeWPtr childNode) {
+  _childNode = childNode;
+}
 
-void GraphEdge::SetParentNode(GraphNode *parentNode) {
+void GraphEdge::SetParentNode(GraphNodeWPtr parentNode) {
   _parentNode = parentNode;
 }
 

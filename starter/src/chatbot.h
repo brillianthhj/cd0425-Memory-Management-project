@@ -1,16 +1,18 @@
 #ifndef CHATBOT_H_
 #define CHATBOT_H_
 
+#include <memory>
 #include <string>
 
 class GraphNode;  // forward declaration
 class ChatLogic;  // forward declaration
+using GraphNodeSPtr = std::shared_ptr<GraphNode>;
 
 class ChatBot {
  private:
   // data handles (not owned)
-  GraphNode *_currentNode;
-  GraphNode *_rootNode;
+  GraphNodeSPtr _currentNode;
+  GraphNodeSPtr _rootNode;
   ChatLogic *_chatLogic;
 
   // proprietary functions
@@ -24,14 +26,18 @@ class ChatBot {
 
   // TODO the following:
   // TODO: add copy constructor
+  ChatBot(const ChatBot &source);
   // TODO: add copy assignment operator
+  ChatBot &operator=(const ChatBot &source);
   // TODO: add move constructor
+  ChatBot(ChatBot &&source);
   // TODO: add move assignment operator
+  ChatBot &operator=(ChatBot &&source);
   // END OF TODO
 
   // getters / setters
-  void SetCurrentNode(GraphNode *node);
-  void SetRootNode(GraphNode *rootNode) { _rootNode = rootNode; }
+  void SetCurrentNode(GraphNodeSPtr node);
+  void SetRootNode(GraphNodeSPtr rootNode) { _rootNode = rootNode; }
   void SetChatLogicHandle(ChatLogic *chatLogic) { _chatLogic = chatLogic; }
 
   // communication

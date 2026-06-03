@@ -31,60 +31,60 @@ ChatBot::~ChatBot() {
             << std::endl;
 }
 
-// copy constructor
-ChatBot::ChatBot(const ChatBot &source) {
-  std::cerr << ">>> Rule of Five Component: ChatBot Copy Constructor <<<"
-            << std::endl;
-  _rootNode = source._rootNode;
-  _chatLogic = source._chatLogic;
-  _chatLogic->SetChatbotHandle(this);
-}
+// // copy constructor
+// ChatBot::ChatBot(const ChatBot &source) {
+//   std::cerr << ">>> Rule of Five Component: ChatBot Copy Constructor <<<"
+//             << std::endl;
+//   _rootNode = source._rootNode;
+//   _chatLogic = source._chatLogic;
+//   _chatLogic->SetChatbotHandle(this);
+// }
 
-// copy assignment operator
-ChatBot &ChatBot::operator=(const ChatBot &source) {
-  std::cerr
-      << ">>> Rule of Five Component: ChatBot Copy Assignment Operator <<<"
-      << std::endl;
-  if (this == &source) return *this;
-  _rootNode = source._rootNode;
-  _chatLogic = source._chatLogic;
-  _chatLogic->SetChatbotHandle(this);
-  return *this;
-}
+// // copy assignment operator
+// ChatBot &ChatBot::operator=(const ChatBot &source) {
+//   std::cerr
+//       << ">>> Rule of Five Component: ChatBot Copy Assignment Operator <<<"
+//       << std::endl;
+//   if (this == &source) return *this;
+//   _rootNode = source._rootNode;
+//   _chatLogic = source._chatLogic;
+//   _chatLogic->SetChatbotHandle(this);
+//   return *this;
+// }
 
-// move constructor
-ChatBot::ChatBot(ChatBot &&source) {
-  std::cerr << ">>> Rule of Five Component: ChatBot Move Constructor <<<"
-            << std::endl;
-  _rootNode = source._rootNode;
-  _chatLogic = source._chatLogic;
-  _chatLogic->SetChatbotHandle(this);
-  source._chatLogic = nullptr;
-}
+// // move constructor
+// ChatBot::ChatBot(ChatBot &&source) {
+//   std::cerr << ">>> Rule of Five Component: ChatBot Move Constructor <<<"
+//             << std::endl;
+//   _rootNode = source._rootNode;
+//   _chatLogic = source._chatLogic;
+//   _chatLogic->SetChatbotHandle(this);
+//   source._chatLogic = nullptr;
+// }
 
-// move assignment operator
-ChatBot &ChatBot::operator=(ChatBot &&source) {
-  std::cerr
-      << ">>> Rule of Five Component: ChatBot Move Assignment Operator <<<"
-      << std::endl;
-  if (this == &source) return *this;
-  _rootNode = source._rootNode;
-  _chatLogic = source._chatLogic;
-  _chatLogic->SetChatbotHandle(this);
-  source._chatLogic = nullptr;
-  return *this;
-}
+// // move assignment operator
+// ChatBot &ChatBot::operator=(ChatBot &&source) {
+//   std::cerr
+//       << ">>> Rule of Five Component: ChatBot Move Assignment Operator <<<"
+//       << std::endl;
+//   if (this == &source) return *this;
+//   _rootNode = source._rootNode;
+//   _chatLogic = source._chatLogic;
+//   _chatLogic->SetChatbotHandle(this);
+//   source._chatLogic = nullptr;
+//   return *this;
+// }
 
 void ChatBot::ReceiveMessageFromUser(std::string message) {
-  typedef std::pair<GraphEdge *, int> EdgeDist;
+  typedef std::pair<GraphEdgePtr, int> EdgeDist;
   std::vector<EdgeDist> levDists;
-  std::vector<GraphEdge *> keywordMatches;
+  std::vector<GraphEdgePtr> keywordMatches;
   std::string userInputLower = message;
   std::transform(userInputLower.begin(), userInputLower.end(),
                  userInputLower.begin(), ::tolower);
   // First, check for direct keyword containment (case-insensitive)
   for (size_t i = 0; i < _currentNode->GetNumberOfChildEdges(); ++i) {
-    GraphEdge *edge = _currentNode->GetChildEdgeAtIndex(i);
+    GraphEdgePtr edge = _currentNode->GetChildEdgeAtIndex(i);
     for (auto keyword : edge->GetKeywords()) {
       std::string keywordLower = keyword;
       std::transform(keywordLower.begin(), keywordLower.end(),
@@ -95,14 +95,14 @@ void ChatBot::ReceiveMessageFromUser(std::string message) {
       }
     }
   }
-  GraphNode *newNode = nullptr;
+  GraphNodeSPtr newNode = nullptr;
   if (!keywordMatches.empty()) {
     // If multiple matches, pick the first (or could add more logic)
-    newNode = keywordMatches[0]->GetChildNode();
+    newNode = keywordMatches[0]->GetChildNode().lock();
   } else {
     // Fall back to Levenshtein distance
     for (size_t i = 0; i < _currentNode->GetNumberOfChildEdges(); ++i) {
-      GraphEdge *edge = _currentNode->GetChildEdgeAtIndex(i);
+      GraphEdgePtr edge = _currentNode->GetChildEdgeAtIndex(i);
       for (auto keyword : edge->GetKeywords()) {
         EdgeDist ed{edge, ComputeLevenshteinDistance(keyword, message)};
         levDists.push_back(ed);
@@ -113,7 +113,7 @@ void ChatBot::ReceiveMessageFromUser(std::string message) {
                 [](const EdgeDist &a, const EdgeDist &b) {
                   return a.second < b.second;
                 });
-      newNode = levDists.at(0).first->GetChildNode();
+      newNode = levDists.at(0).first->GetChildNode().lock();
     } else {
       newNode = _rootNode;
     }
@@ -121,7 +121,7 @@ void ChatBot::ReceiveMessageFromUser(std::string message) {
   _currentNode->MoveChatbotToNewNode(newNode);
 }
 
-void ChatBot::SetCurrentNode(GraphNode *node) {
+void ChatBot::SetCurrentNode(GraphNodeSPtr node) {
   _currentNode = node;
   std::vector<std::string> answers = _currentNode->GetAnswers();
   std::mt19937 generator(int(std::time(0)));

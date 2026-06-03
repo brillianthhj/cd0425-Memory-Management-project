@@ -12,15 +12,17 @@ class GraphEdge;
 class GraphNode;
 class ChatBotPanelDialog;  // Forward declaration for GUI compatibility
                            // (deprecated)
+using ChatBotPtr = std::shared_ptr<ChatBot>;
 
 class ChatLogic {
  private:
   // data handles (owned)
-  std::vector<GraphNode *> _nodes;  // TODO
+  std::vector<std::shared_ptr<GraphNode>> _nodes;  // TODO(fix)
+  std::vector<std::shared_ptr<GraphEdge>> _edges;
 
   // data handles (not owned)
   GraphNode *_currentNode;
-  ChatBot *_chatBot;
+  ChatBotPtr _chatBot;
   ChatBotPanelDialog *_panelDialog;
 
   // proprietary type definitions
@@ -38,7 +40,7 @@ class ChatLogic {
 
   // getter / setter
   void SetPanelDialogHandle(ChatBotPanelDialog *panelDialog);
-  void SetChatbotHandle(ChatBot *chatbot);
+  void SetChatbotHandle(ChatBotPtr chatbot);
 
   // proprietary functions
   void LoadAnswerGraphFromFile(std::string filename);

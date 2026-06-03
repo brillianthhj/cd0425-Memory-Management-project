@@ -9,17 +9,19 @@
 
 // forward declarations
 class GraphEdge;
+using GraphEdgePtr = std::shared_ptr<GraphEdge>;
+using ChatBotPtr = std::shared_ptr<ChatBot>;
 
-class GraphNode {
+class GraphNode : public std::enable_shared_from_this<GraphNode> {
  private:
   //// TODO
 
   // data handles (owned)
-  std::vector<GraphEdge *> _childEdges;  // edges to subsequent nodes
+  std::vector<GraphEdgePtr> _childEdges;  // edges to subsequent nodes
 
   // data handles (not owned)
-  std::vector<GraphEdge *> _parentEdges;  // edges to preceding nodes
-  ChatBot *_chatBot;
+  std::vector<GraphEdgePtr> _parentEdges;  // edges to preceding nodes
+  ChatBotPtr _chatBot;
 
   //// End of TODO
 
@@ -35,18 +37,18 @@ class GraphNode {
   // getter / setter
   int GetID() { return _id; }
   int GetNumberOfChildEdges() { return _childEdges.size(); }
-  GraphEdge *GetChildEdgeAtIndex(int index);
+  GraphEdgePtr &GetChildEdgeAtIndex(int index);
   std::vector<std::string> GetAnswers() { return _answers; }
   int GetNumberOfParents() { return _parentEdges.size(); }
 
   // proprietary functions
   void AddToken(std::string token);  // add answers to list
-  void AddEdgeToParentNode(GraphEdge *edge);
-  void AddEdgeToChildNode(GraphEdge *edge);  // TODO
+  void AddEdgeToParentNode(GraphEdgePtr edge);
+  void AddEdgeToChildNode(GraphEdgePtr edge);  // TODO
 
-  void moveChatbotHere(ChatBot *newNode);  // TODO
+  void MoveChatbotHere(ChatBotPtr newNode);  // TODO
 
-  void MoveChatbotToNewNode(GraphNode *newNode);
+  void MoveChatbotToNewNode(std::shared_ptr<GraphNode> newNode);
 };
 
 #endif /* GRAPHNODE_H_ */

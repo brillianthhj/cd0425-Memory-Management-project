@@ -11,23 +11,23 @@ GraphNode::~GraphNode() {
 
 void GraphNode::AddToken(std::string token) { _answers.push_back(token); }
 
-void GraphNode::AddEdgeToParentNode(GraphEdge *edge) {
+void GraphNode::AddEdgeToParentNode(GraphEdgePtr edge) {
   _parentEdges.push_back(edge);
 }
 
-void GraphNode::AddEdgeToChildNode(std::unique_ptr<GraphEdge> edge) {
-  _childEdges.push_back(edge);  // TODO
+void GraphNode::AddEdgeToChildNode(GraphEdgePtr edge) {
+  _childEdges.push_back(edge);  // TODO(fix)
 }
 
-void GraphNode::moveChatbotHere(ChatBot chatbot) {
-  _chatBot = chatbot;              // TODO
-  _chatBot->SetCurrentNode(this);  // TODO
+void GraphNode::MoveChatbotHere(ChatBotPtr chatbot) {
+  _chatBot = std::move(chatbot);                 // TODO(fix)
+  _chatBot->SetCurrentNode(shared_from_this());  // TODO
 }
 
-void GraphNode::MoveChatbotToNewNode(GraphNode *newNode) {
-  newNode->moveChatbotHere(std::move(_chatBot));  // TODO
+void GraphNode::MoveChatbotToNewNode(GraphNodeSPtr newNode) {
+  newNode->MoveChatbotHere(std::move(_chatBot));  // TODO(fix)
 }
 
-GraphEdge *GraphNode::GetChildEdgeAtIndex(int index) {
-  return _childEdges[index];  // TODO
+GraphEdgePtr& GraphNode::GetChildEdgeAtIndex(int index) {
+  return _childEdges[index];  // TODO(fix)
 }

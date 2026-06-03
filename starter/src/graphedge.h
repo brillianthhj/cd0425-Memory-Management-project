@@ -1,16 +1,18 @@
 #ifndef GRAPHEDGE_H_
 #define GRAPHEDGE_H_
 
+#include <memory>
 #include <string>
 #include <vector>
 
 class GraphNode;  // forward declaration
+using GraphNodeWPtr = std::weak_ptr<GraphNode>;
 
 class GraphEdge {
  private:
   // data handles (not owned)
-  GraphNode *_childNode;
-  GraphNode *_parentNode;
+  GraphNodeWPtr _childNode;
+  GraphNodeWPtr _parentNode;
 
   // proprietary members
   int _id;
@@ -23,9 +25,9 @@ class GraphEdge {
 
   // getter / setter
   int GetID() { return _id; }
-  void SetChildNode(GraphNode *childNode);
-  void SetParentNode(GraphNode *parentNode);
-  GraphNode *GetChildNode() { return _childNode; }
+  void SetChildNode(GraphNodeWPtr childNode);
+  void SetParentNode(GraphNodeWPtr parentNode);
+  GraphNodeWPtr& GetChildNode() { return _childNode; }
   std::vector<std::string> GetKeywords() { return _keywords; }
 
   // proprietary functions
