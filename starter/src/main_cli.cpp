@@ -15,7 +15,7 @@ class ChatLogicCLI : public ChatLogic {
 
 int main() {
   ChatLogicCLI chatLogic;
-  chatLogic.LoadAnswerGraphFromFile("../src/answergraph.txt");
+  chatLogic.LoadAnswerGraphFromFile("src/answergraph.txt");
   // Check if the root node was loaded (basic check for file load success)
   // If the file could not be opened, exit gracefully
   // (Assume that if no nodes are loaded, the file was not found or empty)

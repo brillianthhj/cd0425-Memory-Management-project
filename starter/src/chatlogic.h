@@ -16,11 +16,11 @@ class ChatBotPanelDialog;  // Forward declaration for GUI compatibility
 class ChatLogic {
  private:
   // data handles (owned)
-  std::vector<GraphNode *> _nodes;  // TODO
+  std::vector<std::unique_ptr<GraphNode>> _nodes;  // TODO
+  std::unique_ptr<ChatBot> _chatBot;
 
   // data handles (not owned)
   GraphNode *_currentNode;
-  ChatBot *_chatBot;
   ChatBotPanelDialog *_panelDialog;
 
   // proprietary type definitions

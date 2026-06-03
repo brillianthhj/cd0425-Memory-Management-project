@@ -24,9 +24,13 @@ class ChatBot {
 
   // TODO the following:
   // TODO: add copy constructor
+  ChatBot(const ChatBot &source);
   // TODO: add copy assignment operator
+  ChatBot &operator=(const ChatBot &source);
   // TODO: add move constructor
+  ChatBot(ChatBot &&source);
   // TODO: add move assignment operator
+  ChatBot &operator=(ChatBot &&source);
   // END OF TODO
 
   // getters / setters
