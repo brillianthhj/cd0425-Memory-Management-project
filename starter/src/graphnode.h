@@ -44,10 +44,6 @@ class GraphNode {
   void AddToken(std::string token);  // add answers to list
   void AddEdgeToParentNode(GraphEdge *edge);
   void AddEdgeToChildNode(std::unique_ptr<GraphEdge> edge);  // TODO
-
-  void MoveChatbotHere(ChatBot *newNode);  // TODO
-
-  void MoveChatbotToNewNode(GraphNode *newNode);
 };
 
 #endif /* GRAPHNODE_H_ */

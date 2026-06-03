@@ -118,7 +118,7 @@ void ChatBot::ReceiveMessageFromUser(std::string message) {
       newNode = _rootNode;
     }
   }
-  _currentNode->MoveChatbotToNewNode(newNode);
+  SetCurrentNode(newNode);
 }
 
 void ChatBot::SetCurrentNode(GraphNode *node) {
@@ -133,7 +133,7 @@ void ChatBot::SetCurrentNode(GraphNode *node) {
   if (answer.find("There are no more topics in this section, starting over!") !=
       std::string::npos) {
     if (_currentNode != _rootNode) {
-      _currentNode->MoveChatbotToNewNode(_rootNode);
+      SetCurrentNode(_rootNode);
       // The move will call SetCurrentNode on the root node, which will print
       // the welcome message.
     }
