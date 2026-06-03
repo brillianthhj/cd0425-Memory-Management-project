@@ -143,10 +143,9 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename) {
                   });  // TODO
 
               // TODO: create new edge
-              std::shared_ptr<GraphEdge> edge = std::make_unique<GraphEdge>(id);
+              std::unique_ptr<GraphEdge> edge = std::make_unique<GraphEdge>(id);
               edge->SetChildNode((*childNode).get());
               edge->SetParentNode((*parentNode).get());
-              _edges.push_back(edge);
               // END OF TODO
 
               // find all keywords for current node
@@ -157,8 +156,9 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename) {
                   ->AddEdgeToParentNode(
                       edge.get());  // TODO: add non-owning reference
               (*parentNode)
-                  ->AddEdgeToChildNode(edge);  // TODO: transfer ownership to
-                                               // parent node END OF TODO
+                  ->AddEdgeToChildNode(
+                      std::move(edge));  // TODO: transfer ownership to
+                                         // parent node END OF TODO
             }
           }
         } else {
@@ -200,6 +200,7 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename) {
 
   // TODO: add chatbot to graph root node
   _chatBot->SetRootNode(rootNode);
+  //_chatBot->SetCurrentNode(rootNode);
   rootNode->MoveChatbotHere(_chatBot.get());
   // END OF TODO
 }

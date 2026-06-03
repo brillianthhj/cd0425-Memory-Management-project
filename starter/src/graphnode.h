@@ -43,7 +43,7 @@ class GraphNode {
   // proprietary functions
   void AddToken(std::string token);  // add answers to list
   void AddEdgeToParentNode(GraphEdge *edge);
-  void AddEdgeToChildNode(std::shared_ptr<GraphEdge> edge);  // TODO
+  void AddEdgeToChildNode(std::unique_ptr<GraphEdge> edge);  // TODO
 
   void MoveChatbotHere(ChatBot *newNode);  // TODO
 

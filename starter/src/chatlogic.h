@@ -17,7 +17,6 @@ class ChatLogic {
  private:
   // data handles (owned)
   std::vector<std::unique_ptr<GraphNode>> _nodes;  // TODO
-  std::vector<std::shared_ptr<GraphEdge>> _edges;
   std::unique_ptr<ChatBot> _chatBot;
 
   // data handles (not owned)
