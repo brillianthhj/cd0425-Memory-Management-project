@@ -31,49 +31,49 @@ ChatBot::~ChatBot() {
             << std::endl;
 }
 
-// copy constructor
-ChatBot::ChatBot(const ChatBot &source) {
-  std::cerr << ">>> Rule of Five Component: ChatBot Copy Constructor <<<"
-            << std::endl;
-  _rootNode = source._rootNode;
-  _chatLogic = source._chatLogic;
-  _chatLogic->SetChatbotHandle(this);
-}
+// // copy constructor
+// ChatBot::ChatBot(const ChatBot &source) {
+//   std::cerr << ">>> Rule of Five Component: ChatBot Copy Constructor <<<"
+//             << std::endl;
+//   _rootNode = source._rootNode;
+//   _chatLogic = source._chatLogic;
+//   _chatLogic->SetChatbotHandle(this);
+// }
 
-// copy assignment operator
-ChatBot &ChatBot::operator=(const ChatBot &source) {
-  std::cerr
-      << ">>> Rule of Five Component: ChatBot Copy Assignment Operator <<<"
-      << std::endl;
-  if (this == &source) return *this;
-  _rootNode = source._rootNode;
-  _chatLogic = source._chatLogic;
-  _chatLogic->SetChatbotHandle(this);
-  return *this;
-}
+// // copy assignment operator
+// ChatBot &ChatBot::operator=(const ChatBot &source) {
+//   std::cerr
+//       << ">>> Rule of Five Component: ChatBot Copy Assignment Operator <<<"
+//       << std::endl;
+//   if (this == &source) return *this;
+//   _rootNode = source._rootNode;
+//   _chatLogic = source._chatLogic;
+//   _chatLogic->SetChatbotHandle(this);
+//   return *this;
+// }
 
-// move constructor
-ChatBot::ChatBot(ChatBot &&source) {
-  std::cerr << ">>> Rule of Five Component: ChatBot Move Constructor <<<"
-            << std::endl;
-  _rootNode = source._rootNode;
-  _chatLogic = source._chatLogic;
-  _chatLogic->SetChatbotHandle(this);
-  source._chatLogic = nullptr;
-}
+// // move constructor
+// ChatBot::ChatBot(ChatBot &&source) {
+//   std::cerr << ">>> Rule of Five Component: ChatBot Move Constructor <<<"
+//             << std::endl;
+//   _rootNode = source._rootNode;
+//   _chatLogic = source._chatLogic;
+//   _chatLogic->SetChatbotHandle(this);
+//   source._chatLogic = nullptr;
+// }
 
-// move assignment operator
-ChatBot &ChatBot::operator=(ChatBot &&source) {
-  std::cerr
-      << ">>> Rule of Five Component: ChatBot Move Assignment Operator <<<"
-      << std::endl;
-  if (this == &source) return *this;
-  _rootNode = source._rootNode;
-  _chatLogic = source._chatLogic;
-  _chatLogic->SetChatbotHandle(this);
-  source._chatLogic = nullptr;
-  return *this;
-}
+// // move assignment operator
+// ChatBot &ChatBot::operator=(ChatBot &&source) {
+//   std::cerr
+//       << ">>> Rule of Five Component: ChatBot Move Assignment Operator <<<"
+//       << std::endl;
+//   if (this == &source) return *this;
+//   _rootNode = source._rootNode;
+//   _chatLogic = source._chatLogic;
+//   _chatLogic->SetChatbotHandle(this);
+//   source._chatLogic = nullptr;
+//   return *this;
+// }
 
 void ChatBot::ReceiveMessageFromUser(std::string message) {
   typedef std::pair<GraphEdge *, int> EdgeDist;
