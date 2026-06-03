@@ -5,8 +5,6 @@
 #include <string>
 #include <vector>
 
-#include "chatbot.h"
-
 // forward declarations
 class GraphEdge;
 
@@ -20,7 +18,6 @@ class GraphNode {
 
   // data handles (not owned)
   std::vector<GraphEdge *> _parentEdges;  // edges to preceding nodes
-  ChatBot *_chatBot;
 
   //// End of TODO
 
